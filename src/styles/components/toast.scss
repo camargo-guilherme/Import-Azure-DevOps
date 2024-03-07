@@ -1,0 +1,21 @@
+@import "../variables.scss";
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: #ecffe1 !important;
+  border-left: 5px solid green;
+  background-repeat: no-repeat;
+  background-position: calc(20px) center;
+  background-size: 20px;
+background-image: url('../../assets/icons/green-check.svg');
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: black !important;
+  margin-left: 36px;
+}
+
+.mdc-button__label {
+  color: black !important;
+  font-size: 12px;
+}
+

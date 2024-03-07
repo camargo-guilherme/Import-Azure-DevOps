@@ -1,0 +1,76 @@
+@import "./components/button.scss";
+@import "./components/input.scss";
+@import "./components/loading.scss";
+@import "./components/text.scss";
+@import "./components/transition.scss";
+@import "./components/tags.scss";
+@import "./components/mat-menu.scss";
+@import "./components/modal.scss";
+@import "./components/toast.scss";
+@import "./components/tabs.scss";
+
+// @import "~bootstrap-icons/font/bootstrap-icons.css";
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter/Inter-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+mat-icon {
+  font-family: "Material Icons" !important;
+}
+
+mat-select,
+input,
+button {
+  transition: background-color 0.4s ease;
+}
+
+.dialog-transparent {
+  background-color: transparent !important;
+  mat-dialog-container {
+    background-color: transparent !important;
+    div {
+      background-color: transparent !important;
+      div {
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+
+.pointer,
+mat-icon {
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.hidden-display {
+  display: none;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner 0.8s linear infinite;
+}

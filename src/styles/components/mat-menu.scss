@@ -1,0 +1,50 @@
+@import "../variables.scss";
+
+.menu-card {
+  color: $gray-darker;
+  font-size: 24px;
+
+  .play {
+    mat-icon {
+      color: $active !important;
+    }
+  }
+
+  .pause {
+    mat-icon {
+      color: $paused !important;
+    }
+  }
+
+  .view {
+    mat-icon {
+      color: $purple-dark !important;
+    }
+  }
+
+  .edit {
+    mat-icon {
+      color: $blue !important;
+    }
+  }
+
+  .delete {
+
+    mat-icon,
+    span {
+      color: $danger !important;
+
+    }
+  }
+
+  .notification {
+    background-color: $gray-light;
+    padding: 4px 11px; 
+    border-radius: 50%;
+
+  }
+
+  sub {
+    color: $gray-darker;
+  }
+}

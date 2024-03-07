@@ -1,0 +1,54 @@
+<aside>
+  <img class="logo" src="./assets/Logo.png" alt="" />
+
+  <div class="container-menu-link">
+    <a
+      class="my-2 menu-link"
+      [routerLink]="['/home']"
+      routerLinkActive="active"
+      matTooltip="Início"
+    >
+      <img class="icon" src="./assets/icons/home_500.svg" alt="" />
+      <span *ngIf="viewFullSidebar" class="px-2"> Início </span>
+    </a>
+    <a
+      class="my-2 menu-link"
+      href="./assets/Planilha de Estimativa - Exemplo.xlsx"
+      matTooltip="Baixar Planilha Modelo"
+    >
+      <img class="icon" src="./assets/icons/download.svg" alt="" />
+      <span *ngIf="viewFullSidebar" class="px-3"> Planilha Modelo </span>
+    </a>
+    <a
+      class="my-2 menu-link pointer"
+      matTooltip="Sair"
+      (click)="handleLogout()"
+    >
+      <img class="icon" src="./assets/icons/box-arrow-left.svg" alt="" />
+      <span *ngIf="viewFullSidebar" class="px-3"> Sair </span>
+    </a>
+  </div>
+  <div
+    class="show-hide-menu d-flex align-items-center justify-content-start w-100"
+  >
+    <button (click)="toogleSidebar()">
+      <img
+        class="icon"
+        src="./assets/icons/{{
+          viewFullSidebar
+            ? 'left_panel_close_500.svg'
+            : 'left_panel_open_500.svg'
+        }}"
+        alt=""
+      />
+    </button>
+  </div>
+  <div class="version d-flex align-items-center justify-content-center w-100">
+    <span>
+      Versão:
+      <strong>
+        {{ version }}
+      </strong>
+    </span>
+  </div>
+</aside>

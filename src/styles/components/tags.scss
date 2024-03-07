@@ -1,0 +1,132 @@
+@import "../variables.scss";
+
+
+.borderless{
+  border: none !important;
+}
+
+.status {
+  padding: 5px;
+  border: 1px solid;
+}
+
+.tag {
+  padding: 1px;
+}
+
+.status-active {
+  @extend .status;
+  color: $active;
+  background-color: $active-light;
+}
+
+.status-running {
+  @extend .status;
+  color: $running;
+  background-color: $running-light;
+}
+
+.status-paused {
+  @extend .status;
+  color: $paused;
+  background-color: $paused-light;
+}
+
+.status-danger {
+  @extend .status;
+  color: $danger;
+  background-color: $danger-lightest;
+}
+
+.status-new,
+.status-open {
+  @extend .status;
+  color: $new;
+  background-color: $new-light;
+}
+
+.status-backlog {
+  @extend .status;
+  color: $backlog;
+  background-color: $backlog-light;
+}
+
+.status-development {
+  @extend .status;
+  color: $development;
+  background-color: $development-light;
+}
+
+.status-automated {
+  @extend .status;
+  color: $automated;
+  background-color: $automated-light;
+}
+
+.status-progress {
+  @extend .status;
+  color: $progress;
+  background-color: $progress-light;
+}
+
+.status-concluded {
+  @extend .status;
+  color: $concluded;
+  background-color: $concluded-light;
+}
+
+.status-warning {
+  @extend .status;
+  color: $warning;
+  background-color: $warning-light;
+}
+
+.status-success {
+  @extend .status;
+  color: $success;
+  background-color: $success-light;
+}
+
+.status-canceled,
+.status-locked {
+  @extend .status;
+  color: $canceled;
+  background-color: $canceled-light;
+}
+
+.status-gray {
+  @extend .status;
+  color: $gray-dark;
+  background-color: $gray-light;
+}
+
+.status-purple {
+  @extend .status;
+  color: $purple-dark;
+  background-color: $purple;
+}
+
+.status-cyan {
+  @extend .status;
+  color: $cyan-dark;
+  background-color: $cyan;
+}
+
+
+.tag-disable {
+  @extend .tag;
+  color: $gray-dark;
+  background-color: $gray-light;
+}
+
+.tag-cyan {
+  @extend .tag;
+  color: rgba(0, 120, 147);
+  background-color: rgba(0, 120, 147, 0.1);
+}
+
+.tag-purple {
+  @extend .tag;
+  color: rgba(38, 0, 147);
+  background-color: rgba(38, 0, 147, 0.1);
+}

@@ -1,0 +1,21 @@
+@import "../variables.scss";
+
+label {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0px 0px 4px 4px;
+  color: $gray-darker;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.sub-label {
+  color: $gray-darker;
+  font-size: 10px;
+}

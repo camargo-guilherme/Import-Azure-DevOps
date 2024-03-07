@@ -1,0 +1,162 @@
+@import "./styles/variables.scss";
+@import "./styles/global.scss";
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter";
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+a {
+  color: #57636c;
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+a:hover {
+  color: #171721;
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+html,
+body {
+  height: 100%;
+  background: $primary-lighter;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", Roboto, Geneva, Tahoma, sans-serif;
+}
+
+.custom-modal {
+  background: #ffffff;
+  border-radius: 12px !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f4f4f4;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background: #f4f4f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #dad7d7;
+}
+
+.message-error {
+  height: 50px;
+  color: red;
+  font-weight: 700;
+}
+
+a.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.65 !important;
+}
+
+a.disabled:hover {
+  text-decoration: none !important;
+}
+a.disabled:focus {
+  text-decoration: none !important;
+}
+a.disabled:active {
+  text-decoration: none !important;
+}
+
+.icon-sort {
+  width: 10px !important;
+  height: 25px !important;
+  max-width: 10px !important;
+  max-height: 25px !important;
+}
+
+.btn-options {
+  height: 20px;
+  width: 20px;
+  background-color: transparent !important;
+  border: none;
+}
+
+.menu {
+  position: absolute;
+  z-index: 2;
+  width: 175px;
+  height: 150px;
+  padding: 14px 16px;
+  gap: 8px;
+  background-color: #f8f8f8;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin-top: 175px;
+}
+
+.menu button {
+  border: none;
+  background-color: transparent;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+input[type="checkbox"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #353535 !important;
+}
+
+input[type="checkbox"]:checked {
+  appearance: auto;
+  accent-color: #3f54ac !important;
+}
+
+.checkbox-round {
+  border-radius: 100%;
+}
+
+.checkbox-round[type="checkbox"]:checked {
+  clip-path: circle(46% at 50% 50%);
+}
+
+.show {
+  display: flex !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* TOASTR BUGFIX */
+#toast-container > .toast-title,
+#toast-container > .toast-message {
+  background: transparent !important;
+}
+
+.toast {
+  font-size: initial !important;
+  border: initial !important;
+  backdrop-filter: blur(0) !important;
+}
+.toast-success {
+  background-color: #51a351 !important;
+}
+.toast-error {
+  background-color: #bd362f !important;
+}
+.toast-info {
+  background-color: #2f96b4 !important;
+}
+.toast-warning {
+  background-color: #f89406 !important;
+}

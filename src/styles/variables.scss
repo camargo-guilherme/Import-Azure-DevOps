@@ -1,0 +1,88 @@
+$primary-lighter: #f1f3f6;
+$primary-light: #577da3;
+$primary: #41658a;
+$primary-dark: #1d3e5f;
+
+$secondary: #212529;
+
+$tertiary: #4c3957;
+
+$app-background: #f0f0f0;
+
+$accent-lighter: #cfeae6;
+$accent-light: #91cec4;
+$accent: #62baac;
+$accent-dark: #4e9489;
+
+$danger-lightest: rgba(218, 30, 40, 0.1);
+$danger-light: #e74d55;
+$danger: #da1e28;
+$danger-dark: #a8141c;
+
+$white: #ffffff;
+$black: black;
+$black-80: #333333;
+$yellow: #ffba00;
+
+$gray-lighter: #f6f6f6;
+$gray-light: #e3e3e3;
+$gray: #c2c2c2;
+$gray-dark: #999999;
+$gray-darker: #5c5c5c;
+
+$active-light: rgba(0, 147, 76, 0.1);
+$active: #00934c;
+
+$confirm: #35a500;
+
+$running-light: rgba(1, 71, 176, 0.1);
+$running: #0147b0;
+
+$new-light: #41658a1a;
+$new: #41658a;
+
+$backlog-light: #9b11eb1a;
+$backlog: #9b11eb;
+
+$development-light: #3800d61a;
+$development: #3800d6;
+
+$automated-light: #57ba091a;
+$automated: #57ba09;
+
+$canceled-light: #5858581a;
+$canceled: #585858;
+
+$progress-light: #a58b001a;
+$progress: #a58b00;
+
+$concluded-light: #35a5001a;
+$concluded: #2a7b04;
+
+$warning-light: #da9a1e1a;
+$warning: #da9a1e;
+
+$success-light: #05ae861a;
+$success: #05ae86;
+
+$paused-light: rgba(218, 120, 30, 0.1);
+$paused: #da781e;
+
+$purple-dark: #9900cc1a;
+$purple: #9900cc;
+
+$cyan-dark: #007893;
+$cyan: #0078931a;
+
+$blue: #0676c7;
+
+$data: #165baa;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);

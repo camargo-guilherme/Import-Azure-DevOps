@@ -1,0 +1,141 @@
+<div class="container py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center mt-1">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <section class="project input-container">
+        <label for="project">Projeto</label>
+        <select
+          id="project"
+          class="form-select"
+          aria-label="Selecione o projeto"
+          [(ngModel)]="projectSelected"
+          (change)="handleIterations()"
+        >
+          <option selected disabled value="">Selecione o projeto</option>
+          <option *ngFor="let project of projects" [value]="project.name">
+            {{ project.name }}
+          </option>
+        </select>
+      </section>
+    </div>
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <section class="sprint input-container">
+        <label for="iteration">Sprint</label>
+        <select
+          id="iteration"
+          class="form-select"
+          aria-label="Selecione a sprint"
+          [(ngModel)]="iterationSelected"
+          [disabled]="!projectSelected"
+        >
+          <option selected disabled value="">Selecione a sprint</option>
+          <option *ngFor="let iteration of iterations" [value]="iteration.name">
+            {{ iteration.name }}
+          </option>
+        </select>
+      </section>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center align-items-center mt-4">
+    <div class="d-flex flex-row col-12 col-md-8 col-lg-6 col-xl-4">
+      <section>
+        <input
+          type="file"
+          class="file-input hidden-display"
+          [disabled]="!projectSelected"
+          (change)="onChange($event)"
+          #fileUpload
+        />
+
+        <button
+          class="button-primary"
+          [disabled]="!projectSelected"
+          [matTooltip]="!projectSelected ? 'Selecione um projeto' : ''"
+          (click)="fileUpload.click()"
+        >
+          Selecionar arquivo
+        </button>
+
+        <button
+          class="button-primary-color ms-2"
+          (click)="handleCreateWorkItems()"
+          [disabled]="
+            (projectSelected && !iterationSelected) ||
+            (!projectSelected && !iterationSelected)
+          "
+          [matTooltip]="
+            (projectSelected && !iterationSelected) ||
+            (!projectSelected && !iterationSelected)
+              ? 'Selecione uma sprint'
+              : ''
+          "
+        >
+          Criar Itens
+        </button>
+      </section>
+    </div>
+
+    <div class="col-12 col-md-8 col-lg-6 col-xl-6">
+      <section>
+        <div *ngIf="file">
+          <section class="file-info">
+            <span> <strong>Arquivo</strong>: {{ file.name }} </span>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center align-items-center mt-4">
+    <div class="col-12 col-md-8 col-lg-12 col-xl-10">
+      <div class="accordion w-100" id="accordion-work-items">
+        <div
+          class="accordion-item"
+          *ngFor="let userStory of userStories; let indexUserStory = index"
+        >
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapseUserStory' + indexUserStory"
+              aria-expanded="true"
+              [attr.aria-controls]="'#collapseUserStory' + indexUserStory"
+            >
+              User Story - {{ userStory.title }}
+              <!-- <span *ngIf="userStory.id"> Criado </span> -->
+            </button>
+          </h2>
+          <div
+            id="collapseUserStory{{ indexUserStory }}"
+            class="accordion-collapse collapse show"
+            data-bs-parent="#accordion-user-story-{{ indexUserStory }}"
+          >
+            <div class="accordion-body">
+              <section
+                class="d-flex flex-row justify-content-between align-items-center mb-1"
+                *ngFor="let task of userStory.tasks; let indexTask = index"
+              >
+                <article class="item-task p-1">
+                  <span> Task - {{ task.title }} </span>
+                  <!-- <span *ngIf="task.id"> Criado </span> -->
+                </article>
+                <img
+                  class="icon-check-cicle"
+                  *ngIf="task.id"
+                  src="./assets/icons/check-circle.svg"
+                />
+                <span
+                  *ngIf="!task.id"
+                  class="button-delete pointer"
+                  matTooltip="Remover Task - {{ task.title }}"
+                  (click)="handleRemoveTask(indexUserStory, indexTask)"
+                >
+                  X
+                </span>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

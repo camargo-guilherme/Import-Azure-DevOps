@@ -1,0 +1,34 @@
+@import "../../../styles/variables.scss";
+
+.input-container {
+  label {
+    color: $white;
+  }
+}
+
+.accordion-body {
+  width: 100%;
+
+  .icon-check-cicle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .item-task {
+    border: 1px solid $black-80;
+    border-radius: 5px;
+    width: calc(100% - 30px);
+  }
+
+  span.button-delete {
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: $danger;
+  }
+}
+
+.file-info {
+  color: $white;
+}

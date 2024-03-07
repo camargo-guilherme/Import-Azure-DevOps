@@ -1,0 +1,158 @@
+@import "../variables.scss";
+
+input {
+  border: none;
+  color: $black;
+}
+
+input:not(:placeholder-shown),
+.ng-valid {
+  // border-bottom:2px solid $accent;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.password-input {
+  i {
+    color: $primary-dark;
+    position: relative;
+    right: 29px;
+    top: 3px;
+    font-size: 18px;
+  }
+}
+
+select,
+mat-select {
+  height: 50px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// SELECT MATERIAL
+mat-select {
+  mat-icon {
+    color: $primary;
+  }
+  span {
+    margin-left: 5px;
+    color: $accent !important;
+    font-weight: bold !important;
+  }
+}
+
+mat-option {
+  border: none;
+  span {
+    color: $accent !important;
+    // font-weight: 500 !important;
+  }
+}
+
+.mat-mdc-select {
+  padding: 10px 10px;
+}
+
+.mat-mdc-select,
+.mat-mdc-select-placeholder {
+  font-size: 14px;
+}
+
+.mat-mdc-select-panel {
+  margin: 14px -10px !important;
+}
+
+mat-select,
+.inp-text,
+.inp-seach {
+  height: 50px;
+  background-color: $white;
+  padding: 10px 8px 9px 8px;
+  border: 1px solid $black-80;
+  border-radius: 5px;
+  color: $black;
+
+  // arrow select
+  background-repeat: no-repeat;
+  background-position: calc(100% - 3px) calc(50% + 2px);
+  background-size: 18px;
+
+  &:hover {
+    background-color: $gray-lighter;
+  }
+
+  outline: none;
+}
+
+.inp-six {
+  width: 50px;
+  height: 50px;
+  // background-color: $white;
+  padding: 10px 8px 9px 8px;
+  border: 1px solid $accent;
+  border-radius: 5px;
+  color: $black;
+
+  // arrow select
+  background-repeat: no-repeat;
+  background-position: calc(100% - 3px) calc(50% + 2px);
+  background-size: 18px;
+
+  text-align: center;
+
+  &:hover {
+    background-color: $gray-lighter;
+  }
+
+  outline: none;
+}
+
+mat-select {
+  background-image: url("../../assets/icons/arrow_drop_down.svg");
+  background-size: 25px;
+}
+
+.mat-mdc-select-value {
+  width: 80%;
+}
+.mat-mdc-select-arrow-wrapper {
+  margin-right: 10px;
+}
+
+.inp-icon {
+  position: relative;
+
+  input {
+    padding-left: 30px;
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+  }
+}
+
+// Remove icon select material
+.mat-mdc-select-arrow {
+  display: none;
+}
+
+// Change confirm icon color in mat-option
+.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  color: $primary;
+}
+
+// Input calendar
+
+.input-calendar .mat-datepicker-toggle button {
+  color: $primary;
+}

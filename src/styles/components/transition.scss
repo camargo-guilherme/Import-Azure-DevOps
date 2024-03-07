@@ -1,0 +1,14 @@
+.transition-effect {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.transition-effect.ng-leave,
+.transition-effect.ng-enter {
+  opacity: 1;
+}
+
+.transition-effect.ng-leave.ng-leave-active,
+.transition-effect.ng-enter {
+  opacity: 0;
+}
