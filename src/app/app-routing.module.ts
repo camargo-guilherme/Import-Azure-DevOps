@@ -31,7 +31,7 @@ const routes: Routes = [
       routes, {
       useHash: false,
       onSameUrlNavigation: 'reload',
-      enableTracing: !environment.production,
+      // enableTracing: !environment.production,
       preloadingStrategy: PreloadAllModules,
     }),
   ],

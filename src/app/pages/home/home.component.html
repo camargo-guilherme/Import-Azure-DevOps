@@ -41,17 +41,12 @@
         <input
           type="file"
           class="file-input hidden-display"
-          [disabled]="!projectSelected"
+          accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           (change)="onChange($event)"
           #fileUpload
         />
 
-        <button
-          class="button-primary"
-          [disabled]="!projectSelected"
-          [matTooltip]="!projectSelected ? 'Selecione um projeto' : ''"
-          (click)="fileUpload.click()"
-        >
+        <button class="button-primary" (click)="fileUpload.click()">
           Selecionar arquivo
         </button>
 
@@ -62,11 +57,11 @@
             (projectSelected && !iterationSelected) ||
             (!projectSelected && !iterationSelected)
           "
+          [matTooltip]="!projectSelected ? 'Selecione um projeto' : ''"
           [matTooltip]="
-            (projectSelected && !iterationSelected) ||
-            (!projectSelected && !iterationSelected)
+            projectSelected && !iterationSelected
               ? 'Selecione uma sprint'
-              : ''
+              : 'Selecione um projeto'
           "
         >
           Criar Itens
@@ -88,50 +83,69 @@
     <div class="col-12 col-md-8 col-lg-12 col-xl-10">
       <div class="accordion w-100" id="accordion-work-items">
         <div
-          class="accordion-item"
-          *ngFor="let userStory of userStories; let indexUserStory = index"
+          class="card mb-3"
+          *ngFor="let feature of featuries; let indexFeature = index"
         >
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              [attr.data-bs-target]="'#collapseUserStory' + indexUserStory"
-              aria-expanded="true"
-              [attr.aria-controls]="'#collapseUserStory' + indexUserStory"
+          <div class="card-body">
+            <h2 class="accordion-header">Feature - {{ feature.title }}</h2>
+
+            <div
+              class="accordion-item"
+              *ngFor="
+                let userStory of feature.userStories;
+                let indexUserStory = index
+              "
             >
-              User Story - {{ userStory.title }}
-              <!-- <span *ngIf="userStory.id"> Criado </span> -->
-            </button>
-          </h2>
-          <div
-            id="collapseUserStory{{ indexUserStory }}"
-            class="accordion-collapse collapse show"
-            data-bs-parent="#accordion-user-story-{{ indexUserStory }}"
-          >
-            <div class="accordion-body">
-              <section
-                class="d-flex flex-row justify-content-between align-items-center mb-1"
-                *ngFor="let task of userStory.tasks; let indexTask = index"
-              >
-                <article class="item-task p-1">
-                  <span> Task - {{ task.title }} </span>
-                  <!-- <span *ngIf="task.id"> Criado </span> -->
-                </article>
-                <img
-                  class="icon-check-cicle"
-                  *ngIf="task.id"
-                  src="./assets/icons/check-circle.svg"
-                />
-                <span
-                  *ngIf="!task.id"
-                  class="button-delete pointer"
-                  matTooltip="Remover Task - {{ task.title }}"
-                  (click)="handleRemoveTask(indexUserStory, indexTask)"
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#collapseUserStory' + indexUserStory"
+                  aria-expanded="true"
+                  [attr.aria-controls]="'#collapseUserStory' + indexUserStory"
                 >
-                  X
-                </span>
-              </section>
+                  User Story - {{ userStory.title }}
+                  <!-- <span *ngIf="userStory.id"> Criado </span> -->
+                </button>
+              </h2>
+              <div
+                id="collapseUserStory{{ indexUserStory }}"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#accordion-user-story-{{ indexUserStory }}"
+              >
+                <div class="accordion-body">
+                  <section
+                    class="d-flex flex-row justify-content-between align-items-center mb-1"
+                    *ngFor="let task of userStory.tasks; let indexTask = index"
+                  >
+                    <article class="item-task p-1">
+                      <span> Task - {{ task.title }} </span>
+                      <span> Tempo estimado: {{ task.estimate }}h </span>
+                      <!-- <span *ngIf="task.id"> Criado </span> -->
+                    </article>
+                    <img
+                      class="icon-check-cicle"
+                      *ngIf="task.id"
+                      src="./assets/icons/check-circle.svg"
+                    />
+                    <span
+                      *ngIf="!task.id"
+                      class="button-delete pointer"
+                      matTooltip="Remover Task - {{ task.title }}"
+                      (click)="
+                        handleRemoveTask(
+                          indexFeature,
+                          indexUserStory,
+                          indexTask
+                        )
+                      "
+                    >
+                      X
+                    </span>
+                  </section>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -7,11 +7,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, map, throwError, Observable } from 'rxjs';
+
 import { BaseService } from './base.service';
 import { NotificationService } from './notification.service';
 import { ProjectDTO } from '../models/dtos/project.dto';
 import { IterationDTO } from '../models/dtos/iteration.dto';
 import { WorkItemDTO } from '../models/dtos/work-item.dto';
+import { FeatureDTO } from './../models/dtos/feature.dto';
 import { TaskDTO } from '../models/dtos/task.dto';
 import { UserStoryDTO } from '../models/dtos/user-story.dto';
 import { environment } from 'src/environments/environment';
@@ -70,24 +72,88 @@ export class AzureDevOpsService extends BaseService {
     });
   }
 
-  async createWorkItems(projectName: string, iterationPath: string, userStories: UserStoryDTO[]): Promise<UserStoryDTO[]> {
+  async createWorkItems(projectName: string, iterationPath: string, featuries: FeatureDTO[]): Promise<FeatureDTO[]> {
     try {
-      for (const userStory of userStories) {
-        userStory.id;
-        if (!userStory.id) {
-          userStory.id = await this.createUserStory(projectName, iterationPath, userStory);
+      for (const feature of featuries) {
+        feature.id;
+        if (!feature.id) {
+          feature.id = await this.createFeature(projectName, iterationPath, feature);
         }
 
-        for (const task of userStory.tasks) {
-          task.id = await this.createTask(projectName, iterationPath, task, userStory.id);
+        for (const userStory of feature.userStories) {
+          userStory.id = await this.createUserStory(projectName, iterationPath, userStory);
+          for (const task of userStory.tasks) {
+            task.id = await this.createTask(projectName, iterationPath, task, userStory.id);
+          }
         }
       }
-      return userStories;
+      return featuries;
     } catch (error) {
       throw error;
     } finally {
       this.spinnerService.hide();
     }
+  }
+
+  private async createFeature(projectName: string, iterationPath: string, feature: FeatureDTO) {
+    const data: Field[] = [
+      {
+        op: "add",
+        path: "/fields/System.Title",
+        value: feature.title,
+      },
+      {
+        op: "add",
+        path: "/fields/System.WorkItemType",
+        value: "Feature",
+      },
+      {
+        op: "add",
+        path: "/fields/System.State",
+        value: "New",
+      },
+      // {
+      //   op: "add",
+      //   path: "/fields/System.AssignedTo",
+      //   value: assignedTo,
+      // },
+      {
+        op: "add",
+        path: "/fields/System.IterationPath",
+        value: `${projectName}\\${iterationPath}`,
+      },
+    ];
+
+    if (feature.parentId) {
+      const field = {
+        op: "add",
+        path: "/relations/-",
+        value: {
+          rel: "System.LinkTypes.Hierarchy-Reverse",
+          url: `${environment.apiUrl}/${projectName}/_apis/wit/workitems/${feature.parentId}`,
+          attributes: {
+            comment: "Associated with",
+          },
+        },
+      };
+      data.push(field);
+    }
+
+    return this.post<any, any>(
+      `${projectName}/_apis/wit/workitems/$Feature?api-version=6.1-preview.3`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json-patch+json",
+        }
+      },
+      false
+    ).then(
+      (result) => result.data.id
+    ).catch(error => {
+      console.log('createFeature', error);
+      throw error;
+    })
   }
 
   private async createUserStory(projectName: string, iterationPath: string, userStory: UserStoryDTO) {
@@ -146,7 +212,7 @@ export class AzureDevOpsService extends BaseService {
     ).then(
       (result) => result.data.id
     ).catch(error => {
-      console.log('createTask', error);
+      console.log('createUserStory', error);
       throw error;
     })
   }
@@ -188,7 +254,7 @@ export class AzureDevOpsService extends BaseService {
       {
         op: "add",
         path: "/fields/System.AssignedTo",
-        value: task.assignedTo,
+        value: task.assignedTo ?? '',
       },
       {
         op: "add",

@@ -7,6 +7,7 @@ import { RowXlsxDTO } from '../models/dtos/row-xlsx.dto';
 import { UserStoryDTO } from '../models/dtos/user-story.dto';
 import { TaskDTO } from '../models/dtos/task.dto';
 import { WorkItemDTO } from '../models/dtos/work-item.dto';
+import { FeatureDTO } from '../models/dtos/feature.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,13 @@ export class ImportXlsxService {
     Nome: {
       prop: "title",
       type: String,
-      required: true,
     },
     Tipo: {
       prop: "type",
       type: String,
-      required: true,
       oneOf: [
-        'UserStory',
+        'Feature',
+        'User Story',
         'Task',
       ]
     },
@@ -54,11 +54,12 @@ export class ImportXlsxService {
   ) { }
 
   public async handleImportXLSX(projectName: string, file: File) {
-    let userStories: UserStoryDTO[] = []
+    let featuries: FeatureDTO[] = [];
+    let userStories: UserStoryDTO[] = [];
     try {
       const { rows, errors } = await readXlsxFile<RowXlsxDTO>(file, {
         schema: this.xlsxSchema,
-        includeNullValues: false,
+        includeNullValues: true,
         ignoreEmptyRows: true
       });
 
@@ -73,7 +74,19 @@ export class ImportXlsxService {
 
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
-        if (row.type == "UserStory") {
+        console.log(row)
+        if (row.type == "Feature") {
+          let feature: FeatureDTO = {
+            id: "",
+            title: row.title,
+            userStories: [],
+            parentId: row.parentId ?? '',
+          };
+
+          featuries.push(feature);
+        }
+
+        if (row.type == "User Story") {
           let userStory: UserStoryDTO = {
             id: "",
             title: row.title,
@@ -82,6 +95,34 @@ export class ImportXlsxService {
           };
 
           userStories.push(userStory);
+
+          if (!row.parentId) {
+            let feature = featuries.at(featuries.length - 1);
+            feature.userStories.push(userStory);
+
+            featuries[featuries.length - 1] = feature;
+          } else {
+            let index = featuries.findIndex(
+              (feature) => feature?.id == row.parentId
+            );
+
+            let feature: FeatureDTO;
+
+            if (index >= 0) {
+              feature = featuries.at(index);
+            } else {
+              const workItem: WorkItemDTO = await this.azureDevOpsService.getWorkItem(projectName, row.parentId);
+
+              feature = {
+                id: row.parentId,
+                title: workItem.fields['System.Title'],
+                userStories: [],
+              };
+
+              featuries.push(feature);
+            }
+            feature.userStories.push(userStory);
+          }
         }
 
         if (row.type == "Task") {
@@ -124,7 +165,7 @@ export class ImportXlsxService {
       }
 
       this.notificationService.notifySuccess('Leitura realizada');
-      return userStories;
+      return featuries;
     } catch (error) {
       console.error("Erro ao ler o arquivo:", error);
       throw error;

@@ -129,6 +129,11 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/bootstrap-icons/icons",
                 "output": "./svg"
+              },
+              {
+                "glob": "**/web.config",
+                "input": ".",
+                "output": "."
               }
             ],
             "styles": [

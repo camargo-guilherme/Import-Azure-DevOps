@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "concurrently \"ng serve\" \"electron .\"",
     "start:web-electron": "ng build --base-href ./ && electron .",
-    "start:web": "ng serve --port 4200 --host 0.0.0.0 --disable-host-check true",
+    "start:web": "ng serve -o --port 4200 --host 0.0.0.0 --disable-host-check true",
     "start:electron": "electron .",
     "build:web": "ng build",
     "build:electron": "ng build",
