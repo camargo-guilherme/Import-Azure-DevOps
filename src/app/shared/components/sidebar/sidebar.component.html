@@ -13,6 +13,15 @@
     </a>
     <a
       class="my-2 menu-link"
+      [routerLink]="['/reports']"
+      routerLinkActive="active"
+      matTooltip="Relatórios"
+    >
+      <img class="icon" src="./assets/icons/document.svg" alt="" />
+      <span *ngIf="viewFullSidebar" class="px-2"> Relatórios </span>
+    </a>
+    <a
+      class="my-2 menu-link"
       href="./assets/Planilha de Estimativa - Exemplo.xlsx"
       matTooltip="Baixar Planilha Modelo"
     >

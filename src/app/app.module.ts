@@ -27,6 +27,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -34,6 +35,7 @@ registerLocaleData(localePt);
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

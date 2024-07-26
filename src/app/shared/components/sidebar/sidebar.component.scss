@@ -37,6 +37,8 @@ aside {
       img {
         font-size: 20px;
         color: $primary-lighter;
+        filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(68deg)
+          brightness(0%) contrast(0%);
       }
 
       span {
@@ -50,6 +52,11 @@ aside {
       background-color: $primary-lighter;
       border-top-left-radius: 25px;
       border-bottom-left-radius: 25px;
+
+      img {
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg)
+          brightness(0%) contrast(100%);
+      }
 
       span {
         color: $secondary;

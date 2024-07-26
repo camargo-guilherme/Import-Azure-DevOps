@@ -31,7 +31,6 @@ export class ImportXlsxService {
       prop: "estimate",
       type: Number,
       required: (row) => row[1] === 'Task'
-
     },
     Responsavel: {
       prop: "assignedTo",
@@ -59,7 +58,7 @@ export class ImportXlsxService {
     try {
       const { rows, errors } = await readXlsxFile<RowXlsxDTO>(file, {
         schema: this.xlsxSchema,
-        includeNullValues: true,
+        includeNullValues: false,
         ignoreEmptyRows: true
       });
 

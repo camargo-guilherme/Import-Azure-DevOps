@@ -5,6 +5,7 @@ import { LayoutPagesComponent } from './shared/components/layout-pages/layout-pa
 import { LoginComponent } from './pages/login/login.component';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './pages/home/home.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent,
       },
     ]
   },

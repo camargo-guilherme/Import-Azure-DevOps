@@ -17,7 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
     const PAT = localStorage.getItem('PAT');
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${PAT}`,
+        Authorization: `Basic ${btoa(`:${PAT}`)}`,
       },
     });
 
